@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movieapp/bloc/get_movies_byGenre_bloc.dart';
 import 'package:movieapp/model/movie.dart';
 import 'package:movieapp/style/theme.dart' as Style;
@@ -136,8 +137,45 @@ class _GenreMoviesState extends State<GenreMovies> {
                   Container(
                     width: 100,
                     child: Text(
-                      movies[index].title
+                      movies[index].title,
+                      maxLines: 2,
+                      style: TextStyle(
+                        height: 1.4,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 11.0
+                      ),
                     ),
+                  ),
+                  SizedBox(height: 5.0,),
+                  Row(
+                    children: [
+                      Text(movies[index].rating.toString(),style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold
+                      ),
+                      ),
+                      SizedBox(width: 5.0,),
+                      RatingBar(
+                        itemSize: 8.0,
+                        initialRating: movies[index].rating / 2,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                        itemBuilder: (context, _) {
+                          return Icon(
+                            EvaIcons.star,
+                            color: Style.Colors.secondColor,
+                          );
+                        },
+                        onRatingUpdate: (rating) {
+                          print(rating);
+                        },
+                      )
+                    ],
                   )
                 ],
               ),

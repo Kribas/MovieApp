@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movieapp/bloc/get_movies_byGenre_bloc.dart';
 import 'package:movieapp/model/genre.dart';
 import 'package:movieapp/style/theme.dart'as Style;
+import 'package:movieapp/widgets/genre_movies.dart';
 
 class GenresList extends StatefulWidget {
   final List<Genre> genres;
@@ -19,11 +21,19 @@ class _GenresListState extends State<GenresList> with SingleTickerProviderStateM
   TabController _tabController;
   _GenresListState(this.genres);
 
+
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _tabController = TabController(length: genres.length, vsync: this);
+
+    _tabController.addListener(() {
+      if(_tabController.indexIsChanging) {
+        moviesByGenreBloc.drainStream();
+      }
+    });
   }
 
   @override
@@ -69,7 +79,10 @@ class _GenresListState extends State<GenresList> with SingleTickerProviderStateM
           body: TabBarView(
               controller: _tabController,
               physics: NeverScrollableScrollPhysics(),
-              children: null),
+              children: genres.map((Genre genre) {
+                return GenreMovies(genreId: genre.id,);
+              }).toList(),
+          ),
         ),
       ),
     );

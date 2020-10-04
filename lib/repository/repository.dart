@@ -10,8 +10,8 @@ class MovieRepository {
   var getPopularUrl = '$mainUrl/movie/top_rated';
   var getMovieUrl = '$mainUrl/discover/movie';
   var getPlayingUrl = '$mainUrl/movie/now_playing';
-  var getGenresUrl = '$mainUrl/movie/list';
-  var getPersonsUrl = '$mainUrl/movie/person/week';
+  var getGenresUrl = '$mainUrl/genre/movie/list';
+  var getPersonsUrl = '$mainUrl/person/popular';
 
   Future<MovieResponse> getMovies() async {
     var params = {
