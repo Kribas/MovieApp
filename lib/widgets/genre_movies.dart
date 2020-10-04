@@ -101,6 +101,7 @@ class _GenreMoviesState extends State<GenreMovies> {
                 right: 10.0
               ),
               child: Column(
+
                 children: [
                   movies[index].poster == null ?
                       Container(
@@ -112,6 +113,7 @@ class _GenreMoviesState extends State<GenreMovies> {
                           shape: BoxShape.rectangle
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(EvaIcons.filmOutline,color: Colors.white,size: 50.0,),
                             
